@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transformacion punto de origen</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      font-family: Arial;
+    }
+    .container {
+      border: 1px solid red;
+      width: 100%;
+    }
+    /*.cuadrado:hover {*/
+    .container:hover .cuadrado {
+      animation-play-state: paused; /*Pausar el estado de la animacion, es decir cuando pase el mouse por encima se detiene la animacion*/
+    }
+    .cuadrado {
+      width: 200px;
+      height: 200px;
+      background: #7dc900;
+      margin: 20px;
+      border-radius: 50%;
+      /*transition: .3s;*/
+      animation-name: cuadrado;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation-duration: 2s;
+      /*animation-delay: 1s;*/  /* Cuanto tiempo quiero que tarde en lanzarse la animacion*/
+      /*animation-iteration-count: 2;*/    /*Numero de veces que quiero que se repita la animacion*/
+      animation-iteration-count: infinite;  /*Para que el numero de veces se repita sea infinita*/
+      animation-timing-function: ease;    /*Cambiar el suavizado de la animacion*/
+      /*animation-timing-function: ease-in;
+      animation-timing-function: ease-out;
+      animation-timing-function: ease-in-out;
+      animation-timing-function: linear;*/   /*Que no halla ningun tipo de suavizado*/
+      /*animation-timing-function: cubic-bezier(1, 1,1 ,1);*/
+      /*animation-direction: reverse;*/   /*En que direccion va a empezar, en este caso al reves */
+      animation-direction: alternate;     /*Que valla de forma alternada*/
+      /*animation-fill-mode: forwards;*/  /*Como quiero que mi elemento se vea al final de la animacion, con esta propiedad la animacion con laa que queda es con la que finaliza*/
+      /*animation-play-state: running;*/  /*Configurar el estado de la animacion*/
+      /*animation-play-state: paused;*/   /*Pausar el estado de la animacion*/
+      position: relative;
+    }
+    @keyframes cuadrado {
+      0% {
+        /*opacity: 1;*/
+        left: 0;
+      }
+      100% {
+        /*opacity: 0;*/
+        left: calc(100% - 240px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="cuadrado">
+      Hola mundo!
+    </div>
+  </div>
+</body>
+</html>
