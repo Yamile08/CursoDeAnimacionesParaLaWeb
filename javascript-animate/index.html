@@ -20,11 +20,40 @@
       background: red;
       border-radius: 50%;
     }
+		.buttons{
+			display: flex;
+			justify-content: space-between;
+		}
+    .btn {
+      text-align: center;
+			width: 100px;
+      background: #7dc800;
+      padding: .6em .8em .8em;
+      border: none;
+      color: white;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: inset 0 -.2em rgba(0,0,0, .2);
+      outline: 0;  /*Se le quita el border al boton al darle click*/
+      transition: .2s;
+      will-change: transform;
+    }
+
+    .btn:active {
+      transform: scale(.9);  /*Que el elemento se vea mas pequeño o mas grande*/
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="pelota" id="pelota"></div>
+    <div class="buttons">
+      <button class="btn" id="play">Play</button>
+      <button class="btn" id="pause">Pause</button>
+      <button class="btn" id="stop">Stop</button>
+      <button class="btn" id="reverse">Reverse</button>
+    </div>
   </div>
   <script>
     const $pelota = document.getElementById('pelota');
@@ -46,9 +75,27 @@
       easing: 'linear',
       iterations: Infinity,
       fill: 'forwards',
-      iterationStart: .5, // = 50%   /**/
-      // endDelay: 5000,  /*Tiempo en miliseguntos que nosotros queremos que el elemento espere luego de que se acabe su animacion*/
+      iterationStart: .5, // = 50%
+      // endDelay: 5000,
     })
+
+    const $playButton = document.getElementById('play');
+    const $pauseButton = document.getElementById('pause');
+    const $stopButton = document.getElementById('stop');
+    const $reverseButton = document.getElementById('reverse');
+
+    $playButton.addEventListener('click', (event) => {
+      animation.play();
+    });
+    $pauseButton.addEventListener('click', (event) => {
+      animation.pause();
+    });
+    $stopButton.addEventListener('click', (event) => {
+      animation.cancel();
+    });
+    $reverseButton.addEventListener('click', (event) => {
+      animation.reverse();
+    });
   </script>
 </body>
 </html>
