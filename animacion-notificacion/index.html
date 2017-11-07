@@ -34,11 +34,41 @@
       content: "\f0f3";
       font-family: "FontAwesome";
       display: block;
+      transform-origin: center top;
+    }
+    .notification.notify:before {
+      animation-name: bell;
+      animation-duration: 1s;
+      animation-timing-function: ease-out; /*Al terminar la animacion sea mas lento*/
+    }
+    @keyframes bell {
+      0% {
+        transform: rotate(35deg);
+      }
+      12.5% {
+        transform: rotate(-30deg);
+      }
+      25% {
+        transform: rotate(25deg);
+      }
+      37.5% {
+        transform: rotate(-20deg);
+      }
+      50% {
+        transform: rotate(15deg);
+      }
+      62.5% {
+        transform: rotate(-10deg);
+      }
+      75% {
+        transform: rotate(5deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
     }
 
-
     .notification:after {
-    	content: "1";
       font-size: 11px;
       font-weight: bold;
 
@@ -58,6 +88,15 @@
 
       top: 5px;
       right: 5px;
+      content: attr(data-count);
+      opacity: 0;
+      transform: scale(.5);
+      transition: .3s;
+      will-change: opacity, transform;
+    }
+    .notification.show-count:after {
+      opacity: 1;
+      transform: scale(1);
     }
     .btn {
       text-align: center;
@@ -89,5 +128,20 @@
     <button class="btn primary" id="button">Enviar notificación</button>
     <div class="notification" id="notification"></div>
   </header>
+  <script>
+    const $button = document.getElementById('button');
+    const $bell = document.getElementById('notification');
+
+    $button.addEventListener('click', () => {
+      const count = Number($bell.getAttribute('data-count')) || 0;
+      $bell.setAttribute('data-count', count + 1);
+      $bell.classList.add('show-count');
+      $bell.classList.add('notify');
+    });
+
+    $bell.addEventListener('animationend', ()=> {
+      $bell.classList.remove('notify');
+    });
+  </script>
 </body>
 </html>
